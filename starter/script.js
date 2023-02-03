@@ -1,6 +1,7 @@
 // my API key is  = 556e5cd8ffff392ae1955c107d35e1a2
 //api call for weather  "https://api.openweathermap.org/data/2.5/weather?lat=50.088&lon=14.4208&appid=556e5cd8ffff392ae1955c107d35e1a2"
 //making API call for geo location http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
+//api call for 5-day forecast  https://api.openweathermap.org/data/2.5/forecast?lat=57&lon=-2.15&appid={API key}&units=metric
 
 
 
@@ -19,22 +20,15 @@ searchButton.on('click', function(event){
         var userChoice = $('#search-input').val();
         
         
-       
-
-        
-        //when press button our choice gets inputted into the API call for geo location
+    //when press-button our choice gets inputted into the API call for geo location
     const urlChoiceGeocode =  "http://api.openweathermap.org/geo/1.0/direct?q=" +userChoice+ "&limit=5&units=metric&appid=556e5cd8ffff392ae1955c107d35e1a2"
 
-    //typed city name
-    console.log(userChoice)
     //getting response from APi
     $.ajax({
         url: urlChoiceGeocode,
         method:"GET"
     }).then (function(response){
-            console.log (response);
              latitude = (response[0].lat);
-             console.log(latitude);
              longitude = (response[0].lon);
              //setting local storage to store latitude and logitude for out of function
              localStorage.setItem('latit', latitude);
@@ -51,13 +45,10 @@ searchButton.on('click', function(event){
             url: urlWeather,
             method:"GET"
         }).then (function(response){
-                console.log (response);
-                humidity  = response.main.humidity
-                console.log ("humidity" + response.main.humidity);
-                wind = response.wind.speed
-                console.log ("wind" + response.wind.speed);
-                temperature = response.main.temp
-                console.log ("temp" + response.main.temp);
+                
+                humidity  = response.main.humidity;
+                wind = response.wind.speed;
+                temperature = response.main.temp;
                 localStorage.setItem('humid', humidity);
                 localStorage.setItem('wind', wind);
                 localStorage.setItem('tempe', temperature);
@@ -79,6 +70,7 @@ searchButton.on('click', function(event){
 
 })
 
+//the forecast section -creating 5 cards for 5 days
 var forecastEl = $('#forecast')
 
 for (i=0; i<5; i++){
@@ -111,6 +103,15 @@ var cardEl = $('<div>');
         cardEl.append(futureHumidityEl);
         cardEl.append(futureTempEl);
 }
+
+urlForecast = "https://api.openweathermap.org/data/2.5/forecast?lat="+latitude+"&lon="+ longitude+"&units=metric&appid=556e5cd8ffff392ae1955c107d35e1a2";
+$.ajax({
+    url: urlForecast,
+    method:"GET"
+}).then (function(response){
+        console.log (response);
+        
+});
 
 
 
