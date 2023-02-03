@@ -1,59 +1,62 @@
-/* 
 
-#search-input{
-    width:100%;
-}
-#search-button{
-    width:100%;
-}
-
-.list-group{
-    padding-right: 15px;
-    width: 15rem; */
-/* } */
 .container-fluid{
-    
-
+    margin-bottom:20px;
+    background: linear-gradient(279deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 57%, rgba(0,212,255,1) 100%);
 }
 aside{
     float:left;
-    border:2px solid red;
-    
     margin: 0 1.5%;
-    width: 30%;
+    width: 100%;
 }
 
 section {
     float:left;
     padding:5px;
     display:flex;
+    margin: 5px;
 }
 #today{
-    border:solid 2px blue;
-    height: 50px;
+    background-color: rgb(170, 156, 156);
+    height: 150px;
     float: left;
-  margin: 0 1.5%;
-  width: 30%;
+    margin: 0;
+    width:60%;
 }
+
 #forecast{
-    border: solid black 5px;
+    border: solid rgb(87, 40, 40) 2px;
+    margin:0;
+    width:60%;
+    justify-content:space-evenly;
+    
 }
 
 
 .cityBtn {
-
     margin:5px;
     background-color:rgb(166, 162, 162);
     border:0px;
     border-radius: 5px;
+    width:100%;
     }
 
 
 .btn{
     margin:5px;
-    
     border-radius: 5px; 
 }
+#search-button{
+    width:100%;
+}
+#search-input{
+    width:100%;
+}
+
+.list-group{
+    padding-right: 10px;
+    width: 100%;
+}
+
 .hr{
     border: solid black;
 }
@@ -64,7 +67,8 @@ p{
     padding-top:5px;
 }
 
-.card{margin-right: 30px;}
+
+
 
 
 

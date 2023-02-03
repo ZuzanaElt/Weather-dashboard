@@ -46,7 +46,7 @@ searchButton.on('click', function(event){
         longitude = localStorage.getItem('long');
         urlWeather = "https://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+ longitude+"&units=metric&appid=556e5cd8ffff392ae1955c107d35e1a2"
 
-    //getting information - temperature, wind and humidity
+    //getting information - temperature, wind and humidity from Api
         $.ajax({
             url: urlWeather,
             method:"GET"
@@ -62,19 +62,19 @@ searchButton.on('click', function(event){
                 localStorage.setItem('wind', wind);
                 localStorage.setItem('tempe', temperature);
         });
-
+        //get data from local Storage and populate the Today's section
         let cityName = $('<h2>');
         cityName.text(userChoice);
         todaySection.append(cityName)
 
         let tempEl = $('<p>');
-        tempEl.text("Temperature: " + temperature + " C");
+        tempEl.text("Temperature: " + localStorage.getItem('tempe') + " C");
         cityName.append(tempEl);
         let humidityEl = $('<p>');
-        humidityEl.text("Humidity: " + temperature + " %");
+        humidityEl.text("Humidity: " + localStorage.getItem('humid') + " %");
         cityName.append(humidityEl);
         let windndEl = $('<p>');
-        windndEl.text("Wind: " + wind + " KPH");
+        windndEl.text("Wind: " + localStorage.getItem('wind') + " KPH");
         cityName.append(windndEl);
 
 })
@@ -83,12 +83,12 @@ var forecastEl = $('#forecast')
 
 for (i=0; i<5; i++){
 var cardEl = $('<div>');
-        
+       
         cardEl.css('backgroundColor', 'rgb(42, 42, 65)');
         cardEl.css('color', 'white');
-        cardEl.css('margin', '0 3px 0 3px');
+        cardEl.css('margin', '0 3px 8px 3px');
         cardEl.css('padding', '10px');
-        cardEl.text('5-Day Forecast');
+        cardEl.text('');
         //attach cards to section
         forecastEl.append (cardEl);
 
@@ -96,11 +96,16 @@ var cardEl = $('<div>');
         var futureTempEl = $('<p>');
         var futureHumidityEl = $('<p>');
         var futureIcon = $('<p>');
-        futureDateEl.text ('11/01/1111');
-        futureIcon.text('ICON IMAGE');
-        futureTempEl.text  ('13 C');
-        futureHumidityEl.text  ('45 %');
         cardEl.append(futureIcon);
+        futureIcon.attr("class","sourceText fa-solid fa-sun"); 
+        $(futureIcon.sourceText).append('<i class="fa-solid fa-sun"></i>'); 
+
+        futureDateEl.text ('11/01/1111');
+        
+        
+        futureTempEl.text  ('Temp: 13 C');
+        futureHumidityEl.text  ('Humidity: 45 %');
+        
         cardEl.append(futureHumidityEl);
         cardEl.append(futureDateEl);
         cardEl.append(futureHumidityEl);
