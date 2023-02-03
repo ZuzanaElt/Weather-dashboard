@@ -1,0 +1,38 @@
+.container-fluid{
+    display:flex;
+}
+.cityBtn {
+
+margin:5px;
+background-color:rgb(166, 162, 162);
+border:0px;
+border-radius: 5px;
+}
+
+.list-group{
+    padding-right: 15px;
+    width: 15rem;
+}
+aside{
+    border:2px solid red;
+    
+width: 50%;
+}
+#today{
+    border:solid 2px blue;
+}
+
+.btn{
+    margin:5px;
+    
+    border-radius: 5px; 
+}
+.hr{
+    border: solid black;
+}
+#search-input{
+    width:100%;
+}
+#search-button{
+    width:100%;
+}
