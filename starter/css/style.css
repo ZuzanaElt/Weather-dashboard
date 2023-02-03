@@ -1,26 +1,53 @@
-.container-fluid{
-    display:flex;
-}
-.cityBtn {
+/* 
 
-margin:5px;
-background-color:rgb(166, 162, 162);
-border:0px;
-border-radius: 5px;
+#search-input{
+    width:100%;
+}
+#search-button{
+    width:100%;
 }
 
 .list-group{
     padding-right: 15px;
-    width: 15rem;
+    width: 15rem; */
+/* } */
+.container-fluid{
+    
+
 }
 aside{
+    float:left;
     border:2px solid red;
     
-width: 50%;
+    margin: 0 1.5%;
+    width: 30%;
+}
+
+section {
+    float:left;
+    padding:5px;
+    display:flex;
 }
 #today{
     border:solid 2px blue;
+    height: 50px;
+    float: left;
+  margin: 0 1.5%;
+  width: 30%;
 }
+#forecast{
+    border: solid black 5px;
+}
+
+
+.cityBtn {
+
+    margin:5px;
+    background-color:rgb(166, 162, 162);
+    border:0px;
+    border-radius: 5px;
+    }
+
 
 .btn{
     margin:5px;
@@ -30,9 +57,14 @@ width: 50%;
 .hr{
     border: solid black;
 }
-#search-input{
-    width:100%;
+
+
+p{
+    font-size: 14px;
+    padding-top:5px;
 }
-#search-button{
-    width:100%;
-}
+
+.card{margin-right: 30px;}
+
+
+
