@@ -1,7 +1,7 @@
 
 .container-fluid{
     margin-bottom:20px;
-    background: linear-gradient(279deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 57%, rgba(0,212,255,1) 100%);
+    background: linear-gradient(279deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 57%, rgb(82, 128, 203) 100%);
 }
 aside{
     float:left;
@@ -24,7 +24,7 @@ section {
 }
 
 #forecast{
-    border: solid rgb(87, 40, 40) 2px;
+    
     margin:0;
     width:60%;
     justify-content:space-evenly;
