@@ -96,14 +96,55 @@ searchButton.on('click', function(event){
                         console.log (response);
 
                         //from the [0] object
-                        let temp4card = response.list[0].main.temp;
-                        let icon4card = response.list[0].weather[0].icon;
-                        let  humid4card = response.list[0].main.humidity;
-                        console.log(temp4card+ icon4card + humid4card)
+                        
+                       
                         ///////////////////
                         ///////////////////////
-                        currentPicEl.setAttribute("src", "https://openweathermap.org/img/wn/" + weatherPic + "@2x.png");
-                currentPicEl.setAttribute("alt", response.data.weather[0].description);
+                             //forecast section -creating 5 cards for 5 days
+                        var forecastEl = $('#forecast')
+
+                        for (i=0; i<5; i++){
+
+                            let temp4card = response.list[i].main.temp;
+                            let icon4card = response.list[i].weather[0].icon;
+                            let  humid4card = response.list[i].main.humidity;
+                            let date4card = response.list[i].dt_text;
+                            
+                                let cardEl = $('<div>');
+
+                                //set css of te cards
+                                cardEl.css('backgroundColor', 'rgb(74, 123, 203)');
+                                cardEl.css('color', 'white');
+                                cardEl.css('margin', '0 3px 8px 3px');
+                                cardEl.css('padding', '10px');
+                                cardEl.text('');
+                                //attach cards to section
+                                forecastEl.append (cardEl);
+
+                                let futureIcon = $('<img>');
+                                cardEl.append(futureIcon);
+
+                                let futureDateEl = $('<p>');
+                                cardEl.append(futureDateEl);
+
+                                let futureTempEl = $('<p>');
+                                cardEl.append(futureTempEl);
+
+                                let futureHumidityEl = $('<p>');
+                                cardEl.append(futureHumidityEl);     
+                                //add content to cards
+                                futureHumidityEl.text  ("Humidity: " + humid4card + " %");
+                                futureTempEl.text  ("Temp: " + temp4card + " C");
+                                futureDateEl.text (date4card)
+                                
+                                //setting next day date
+                                const tomorrow = new Date(timeNow)
+                                tomorrow.setDate(tomorrow.getDate() + i)
+                                let formatedTom = `${tomorrow.getDate()+1}/${tomorrow.getMonth()}/${tomorrow.getFullYear()}`
+                                console.log(formatedTom)
+                                futureDateEl.text (formatedTom)
+                            
+                        }
                         /////////////////
                         ///////////////
                         /////////////////
@@ -111,43 +152,7 @@ searchButton.on('click', function(event){
 
         });
 
-        //forecast section -creating 5 cards for 5 days
-        var forecastEl = $('#forecast')
-
-        for (i=0; i<5; i++){
-                let cardEl = $('<div>');
-                //set css of te cards
-                cardEl.css('backgroundColor', 'rgb(74, 123, 203)');
-                cardEl.css('color', 'white');
-                cardEl.css('margin', '0 3px 8px 3px');
-                cardEl.css('padding', '10px');
-                cardEl.text('');
-                //attach cards to section
-                forecastEl.append (cardEl);
-
-                let futureIcon = $('<img>');
-                cardEl.append(futureIcon);
-
-                let futureDateEl = $('<p>');
-                cardEl.append(futureDateEl);
-
-                let futureTempEl = $('<p>');
-                cardEl.append(futureTempEl);
-
-                let futureHumidityEl = $('<p>');
-                cardEl.append(futureHumidityEl);     
-                 //add content to cards
-                futureHumidityEl.text  ("Humidity: " + localStorage.getItem('humid') + " %");
-                futureTempEl.text  ("Temp: " + localStorage.getItem('tempe') + " C");
-
-                //setting next day date
-                const tomorrow = new Date(timeNow)
-                tomorrow.setDate(tomorrow.getDate() + i)
-                let formatedTom = `${tomorrow.getDate()}/${tomorrow.getMonth() + 1}/${tomorrow.getFullYear()}`
-                console.log(formatedTom)
-                futureDateEl.text (formatedTom)
-               
-        }
+       
 
        
        
