@@ -1,9 +1,4 @@
 // my API key is  = 556e5cd8ffff392ae1955c107d35e1a2
-//api call for weather  "https://api.openweathermap.org/data/2.5/weather?lat=50.088&lon=14.4208&appid=556e5cd8ffff392ae1955c107d35e1a2"
-//making API call for geo location http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
-//api call for 5-day forecast  https://api.openweathermap.org/data/2.5/forecast?lat=57&lon=-2.15&appid={API key}&units=metric
-
-
 
 const searchButton = $('#search-button');
 let todaySection = $('#today')
@@ -12,7 +7,11 @@ let longitude = 0;
 let humidity = 0;
 let temperature = 0;
 let wind = 0;
+let iconCodeToday = "";
 const timeNow = new Date();
+let todayDate = (currentDate());
+
+
 //function to get today's date
 function currentDate() {
     const timeNow = new Date();
@@ -20,35 +19,40 @@ function currentDate() {
     const month = ('0' + (timeNow.getMonth() + 1)).slice(-2);
     const year = timeNow.getFullYear();
 
-    return `${date}/${month}/${year}`
+    return `${date}-${month}-${year}`
 };
-
-
-
-//assigning function value to the <p> element
-let todayDate = (currentDate());
- console.log(currentDate())
 
  function todayWeather(){
       
-    todaySection = $('#today');
+            todaySection = $('#today');
 
-    let cityName = $('<h2>');
-    cityName.text(localStorage.getItem('city') + " " + todayDate);
-    todaySection.append(cityName);
-    //temperature in the chosen city
-    let tempEl = $('<p>');
-    tempEl.text("Temperature: " + localStorage.getItem('tempe') + " C");
-    cityName.append(tempEl);
-    //humidity in chosen city
-    let humidityEl = $('<p>');
-    humidityEl.text("Humidity: " + localStorage.getItem('humid') + " %");
-    cityName.append(humidityEl);
-    //wind in chosen city
-    let windndEl = $('<p>');
-    windndEl.text("Wind: " + localStorage.getItem('wind') + " KPH");
-    cityName.append(windndEl);
-   }
+            let cityName = $('<h2>');
+            cityName.text(localStorage.getItem('city') + " " + todayDate);
+            todaySection.append(cityName);
+            //temperature in the chosen city
+            let tempEl = $('<p>');
+            tempEl.text("Temperature: " + localStorage.getItem('tempe') + " ℃");
+            cityName.append(tempEl);
+            //humidity in chosen city
+            let humidityEl = $('<p>');
+            humidityEl.text("Humidity: " + localStorage.getItem('humid') + " %");
+            cityName.append(humidityEl);
+            //wind in chosen city
+            let windndEl = $('<p>');
+            windndEl.text("Wind: " + localStorage.getItem('wind') + " KPH");
+            cityName.append(windndEl);
+            let todayIcon =$('<img>');
+            todaySection.append(todayIcon);
+            
+            // //weather icon for today section
+            let iconTodayURL = "http://openweathermap.org/img/wn/"+iconCodeToday +"@2x.png";
+            $.ajax({
+                url: iconTodayURL,
+                method:"GET"
+            }).then (function(response){
+                todayIcon.attr ( 'src',iconTodayURL);
+            });
+}
 
 searchButton.on('click', function(event){
         event.preventDefault();
@@ -56,7 +60,7 @@ searchButton.on('click', function(event){
         localStorage.setItem('city', userChoice);
         
         
-        //when press-button our choice gets inputted into the API call for geo location
+        //when pressed-button our choice gets inputted into the API call for geo location
         let urlChoiceGeocode =  "http://api.openweathermap.org/geo/1.0/direct?q=" +userChoice+ "&limit=5&units=metric&appid=556e5cd8ffff392ae1955c107d35e1a2";
 
         //getting response from APi
@@ -64,45 +68,48 @@ searchButton.on('click', function(event){
               url: urlChoiceGeocode,
               method:"GET"
         }).then (function(response){
-                    latitude = (response[0].lat);
-                    longitude = (response[0].lon);
-                    //setting local storage to store latitude and logitude for out of function
-                    localStorage.setItem('latit', latitude);
-                    localStorage.setItem('long', longitude);
-                    console.log(latitude)
-                    //getting information - temperature, wind and humidity from Api
-                    let =  urlWeather = "https://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+ longitude+"&units=metric&appid=556e5cd8ffff392ae1955c107d35e1a2"
-                    $.ajax({
-                    url: urlWeather,
-                    method:"GET"
-                    }).then (function(response){
+                latitude = (response[0].lat);
+                longitude = (response[0].lon);
+                console.log(response)
+                
+                //setting local storage to store latitude and logitude for out of function
+                localStorage.setItem('latit', latitude);
+                localStorage.setItem('long', longitude);
+                //getting information - temperature, wind and humidity from Api
+                let =  urlWeather = "https://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+ longitude+"&units=metric&appid=556e5cd8ffff392ae1955c107d35e1a2"
+                $.ajax({
+                url: urlWeather,
+                method:"GET"
+                }).then (function(response){
+                    
+                        iconCodeToday = response.weather[0].icon;
+                        console.log(iconCodeToday)
+                        humidity  = response.main.humidity;
+                        wind = response.wind.speed;
+                        temperature = Math.floor(response.main.temp);
+                        localStorage.setItem('humid', humidity);
+                        localStorage.setItem('wind', wind);
+                        localStorage.setItem('tempe', temperature);
                             
-                            humidity  = response.main.humidity;
-                            wind = response.wind.speed;
-                            temperature = response.main.temp;
-                            localStorage.setItem('humid', humidity);
-                            localStorage.setItem('wind', wind);
-                            localStorage.setItem('tempe', temperature);
-                             //get data from local Storage and populate the Today's section
-                            todayWeather()
-                        
-                     });   
-                     
-                     urlForecast = "https://api.openweathermap.org/data/2.5/forecast?lat="+latitude+"&lon="+ longitude+"&units=metric&appid=556e5cd8ffff392ae1955c107d35e1a2";
-                    $.ajax({
-                        url: urlForecast,
-                        method:"GET"
-                    }).then (function(response){
-                        
-                            //forecast section -creating 5 cards for 5 days
-                            var forecastEl = $('#forecast')
+                        //get data from local Storage and populate the Today's section
+                        todayWeather()
+                });   
+                    
+                    urlForecast = "https://api.openweathermap.org/data/2.5/forecast?lat="+latitude+"&lon="+ longitude+"&units=metric&appid=556e5cd8ffff392ae1955c107d35e1a2";
+                $.ajax({
+                    url: urlForecast,
+                    method:"GET"
+                }).then (function(response){
 
-                            for (i=0; i<40; i++){
-                                    //choosing object through using time value
-                                    let forecastHour = response.list[i].dt_txt;
-                                    let forecastDate = forecastHour.substring(0,10);
+                        //forecast section -creating 5 cards for 5 days
+                        var forecastEl = $('#forecast')
 
-                                    if(forecastHour.substring(11,19)==("12:00:00")) {
+                        for (i=0; i<40; i++){
+                                //choosing object through using time value
+                                let forecastHour = response.list[i].dt_txt;
+                                let forecastDate = forecastHour.substring(0,10);
+
+                                if(forecastHour.substring(11,19)==("12:00:00")) {
 
                                         let tempCardData = response.list[i].main.temp;
                                         let iconCardData = response.list[i].weather[0].icon;
@@ -132,12 +139,11 @@ searchButton.on('click', function(event){
                                         let futureHumidityEl = $('<p>');
                                         cardEl.append(futureHumidityEl);     
 
-
                                         //add content to cards for humidity and temperature
                                         futureHumidityEl.text  ("Humidity: " + humidCardData + " %");
-                                        futureTempEl.text  ("Temp: " + tempCardData + " C");
+                                        futureTempEl.text  ("Temp: " + tempCardData +" ℃");
                                         
-                                    // changing date format to match the today's date
+                                        // changing date format to match the today's date
                                         [y,y1,y2,y3,s,m,m1,s,d,d1] = forecastDate.split("");
                                         let twistedDate = [d,d1,s, m, m1,s,y,y1,y2,y3].join("");
                                         futureDateEl.text (twistedDate);
@@ -151,17 +157,10 @@ searchButton.on('click', function(event){
                                             futureIcon.attr ( 'src',iconURL);
                                         });
 
-                                    }; 
-                            };
-                        
-                     });
-
-        });
-
-       
-
-       
-       
+                                }; 
+                        };                        
+                    });
+        });       
 });
 
 

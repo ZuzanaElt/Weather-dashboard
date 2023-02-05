@@ -8,3 +8,9 @@ positiinoing of elements https://learn.shayhowe.com/html-css/positioning-content
                                 // tomorrow.setDate(tomorrow.getDate() + i)
                                 // let formatedTom = `${tomorrow.getDate()+1}/${tomorrow.getMonth()}/${tomorrow.getFullYear()}`
                                 // console.log(formatedTom)
+
+
+##
+reversing order of string:
+Fullstack Guy
+https://stackoverflow.com/questions/54722767/changing-order-of-characters-in-a-string-using-javascript
