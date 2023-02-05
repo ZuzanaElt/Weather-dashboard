@@ -98,17 +98,16 @@ searchButton.on('click', function(event){
                         //from the [0] object
                         
                        
-                        ///////////////////
-                        ///////////////////////
-                             //forecast section -creating 5 cards for 5 days
+                        
+                         //forecast section -creating 5 cards for 5 days
                         var forecastEl = $('#forecast')
 
                         for (i=0; i<5; i++){
 
-                            let temp4card = response.list[i].main.temp;
-                            let icon4card = response.list[i].weather[0].icon;
-                            let  humid4card = response.list[i].main.humidity;
-                            let date4card = response.list[i].dt_text;
+                            let tempCardData = response.list[i].main.temp;
+                            let iconCardData = response.list[i].weather[0].icon;
+                            let  humidCardData = response.list[i].main.humidity;
+                            
                             
                                 let cardEl = $('<div>');
 
@@ -132,10 +131,12 @@ searchButton.on('click', function(event){
 
                                 let futureHumidityEl = $('<p>');
                                 cardEl.append(futureHumidityEl);     
-                                //add content to cards
-                                futureHumidityEl.text  ("Humidity: " + humid4card + " %");
-                                futureTempEl.text  ("Temp: " + temp4card + " C");
-                                futureDateEl.text (date4card)
+
+
+                                //add content to cards for humidity and temperature
+                                futureHumidityEl.text  ("Humidity: " + humidCardData + " %");
+                                futureTempEl.text  ("Temp: " + tempCardData + " C");
+                                
                                 
                                 //setting next day date
                                 const tomorrow = new Date(timeNow)
@@ -143,11 +144,17 @@ searchButton.on('click', function(event){
                                 let formatedTom = `${tomorrow.getDate()+1}/${tomorrow.getMonth()}/${tomorrow.getFullYear()}`
                                 console.log(formatedTom)
                                 futureDateEl.text (formatedTom)
-                            
+
+                                // //weather icon
+                                let iconURL = "http://openweathermap.org/img/wn/"+iconCardData +"@2x.png";
+                                $.ajax({
+                                    url: iconURL,
+                                    method:"GET"
+                                }).then (function(response){
+                                    futureIcon.attr ( 'src',iconURL);
+                                })
                         }
-                        /////////////////
-                        ///////////////
-                        /////////////////
+                       
                      });
 
         });
