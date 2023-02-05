@@ -10,6 +10,7 @@ let wind = 0;
 let iconCodeToday = "";
 const timeNow = new Date();
 let todayDate = (currentDate());
+var forecastEl = $('#forecast');
 
 
 //function to get today's date
@@ -56,6 +57,7 @@ function currentDate() {
 
 searchButton.on('click', function(event){
         event.preventDefault();
+        clearSections()
         let userChoice = $('#search-input').val();
         localStorage.setItem('city', userChoice);
         
@@ -102,7 +104,7 @@ searchButton.on('click', function(event){
                 }).then (function(response){
 
                         //forecast section -creating 5 cards for 5 days
-                        var forecastEl = $('#forecast')
+                        
 
                         for (i=0; i<40; i++){
                                 //choosing object through using time value
@@ -163,7 +165,10 @@ searchButton.on('click', function(event){
         });       
 });
 
-
+function clearSections() {
+    forecastEl.empty();
+    todaySection.empty();
+}
  
       
     
