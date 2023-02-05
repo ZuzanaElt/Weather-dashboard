@@ -93,82 +93,67 @@ searchButton.on('click', function(event){
                         url: urlForecast,
                         method:"GET"
                     }).then (function(response){
-                        console.log (response);
-
-                       
                         
-                       
-                        
-                         //forecast section -creating 5 cards for 5 days
-                        var forecastEl = $('#forecast')
+                            //forecast section -creating 5 cards for 5 days
+                            var forecastEl = $('#forecast')
 
-                        for (i=0; i<40; i++){
+                            for (i=0; i<40; i++){
+                                    //choosing object through using time value
+                                    let forecastHour = response.list[i].dt_txt;
+                                    let forecastDate = forecastHour.substring(0,10);
 
-                            let testChoice = response.list[i].dt_txt;
-                            let testDate = testChoice.substring(0,10);
+                                    if(forecastHour.substring(11,19)==("12:00:00")) {
 
-                            if(testChoice.substring(11,19)==("12:00:00")) {
-
-                                //choosing object through using time value
-                                console.log( testChoice.substring(11,19)+ "this is the one");
-
-                                 
+                                        let tempCardData = response.list[i].main.temp;
+                                        let iconCardData = response.list[i].weather[0].icon;
+                                        let  humidCardData = response.list[i].main.humidity;
                                     
-                                let tempCardData = response.list[i].main.temp;
-                                let iconCardData = response.list[i].weather[0].icon;
-                                let  humidCardData = response.list[i].main.humidity;
-                            
-                            
-                                let cardEl = $('<div>');
+                                    
+                                        let cardEl = $('<div>');
 
-                                //set css of the cards
-                                cardEl.css('backgroundColor', 'rgb(74, 123, 203)');
-                                cardEl.css('color', 'white');
-                                cardEl.css('margin', '0 3px 8px 3px');
-                                cardEl.css('padding', '10px');
-                                cardEl.text('');
-                                //attach cards to section
-                                forecastEl.append (cardEl);
+                                        //set css of the cards
+                                        cardEl.css('backgroundColor', 'rgb(74, 123, 203)');
+                                        cardEl.css('color', 'white');
+                                        cardEl.css('margin', '0 3px 8px 3px');
+                                        cardEl.css('padding', '10px');
+                                        cardEl.text('');
+                                        //attach cards to section
+                                        forecastEl.append (cardEl);
 
-                                let futureIcon = $('<img>');
-                                cardEl.append(futureIcon);
+                                        let futureIcon = $('<img>');
+                                        cardEl.append(futureIcon);
 
-                                let futureDateEl = $('<p>');
-                                cardEl.append(futureDateEl);
+                                        let futureDateEl = $('<p>');
+                                        cardEl.append(futureDateEl);
 
-                                let futureTempEl = $('<p>');
-                                cardEl.append(futureTempEl);
+                                        let futureTempEl = $('<p>');
+                                        cardEl.append(futureTempEl);
 
-                                let futureHumidityEl = $('<p>');
-                                cardEl.append(futureHumidityEl);     
+                                        let futureHumidityEl = $('<p>');
+                                        cardEl.append(futureHumidityEl);     
 
 
-                                //add content to cards for humidity and temperature
-                                futureHumidityEl.text  ("Humidity: " + humidCardData + " %");
-                                futureTempEl.text  ("Temp: " + tempCardData + " C");
-                                
-                                
-                                // //setting next day date
-                                // const tomorrow = new Date(timeNow)
-                                // tomorrow.setDate(tomorrow.getDate() + i)
-                                // let formatedTom = `${tomorrow.getDate()+1}/${tomorrow.getMonth()}/${tomorrow.getFullYear()}`
-                                // console.log(formatedTom)
-                                futureDateEl.text (testDate)
+                                        //add content to cards for humidity and temperature
+                                        futureHumidityEl.text  ("Humidity: " + humidCardData + " %");
+                                        futureTempEl.text  ("Temp: " + tempCardData + " C");
+                                        
+                                    // changing date format to match the today's date
+                                        [y,y1,y2,y3,s,m,m1,s,d,d1] = forecastDate.split("");
+                                        let twistedDate = [d,d1,s, m, m1,s,y,y1,y2,y3].join("");
+                                        futureDateEl.text (twistedDate);
 
-                                // //weather icon
-                                let iconURL = "http://openweathermap.org/img/wn/"+iconCardData +"@2x.png";
-                                $.ajax({
-                                    url: iconURL,
-                                    method:"GET"
-                                }).then (function(response){
-                                    futureIcon.attr ( 'src',iconURL);
-                                });
+                                        // //weather icon
+                                        let iconURL = "http://openweathermap.org/img/wn/"+iconCardData +"@2x.png";
+                                        $.ajax({
+                                            url: iconURL,
+                                            method:"GET"
+                                        }).then (function(response){
+                                            futureIcon.attr ( 'src',iconURL);
+                                        });
 
-                            } else{
-                                console.log("PROBLEM")
-                            }   
-                        }
-                       
+                                    }; 
+                            };
+                        
                      });
 
         });
