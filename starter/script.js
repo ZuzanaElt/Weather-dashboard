@@ -95,23 +95,33 @@ searchButton.on('click', function(event){
                     }).then (function(response){
                         console.log (response);
 
-                        //from the [0] object
+                       
                         
                        
                         
                          //forecast section -creating 5 cards for 5 days
                         var forecastEl = $('#forecast')
 
-                        for (i=0; i<5; i++){
+                        for (i=0; i<40; i++){
 
-                            let tempCardData = response.list[i].main.temp;
-                            let iconCardData = response.list[i].weather[0].icon;
-                            let  humidCardData = response.list[i].main.humidity;
+                            let testChoice = response.list[i].dt_txt;
+                            let testDate = testChoice.substring(0,10);
+
+                            if(testChoice.substring(11,19)==("12:00:00")) {
+
+                                //choosing object through using time value
+                                console.log( testChoice.substring(11,19)+ "this is the one");
+
+                                 
+                                    
+                                let tempCardData = response.list[i].main.temp;
+                                let iconCardData = response.list[i].weather[0].icon;
+                                let  humidCardData = response.list[i].main.humidity;
                             
                             
                                 let cardEl = $('<div>');
 
-                                //set css of te cards
+                                //set css of the cards
                                 cardEl.css('backgroundColor', 'rgb(74, 123, 203)');
                                 cardEl.css('color', 'white');
                                 cardEl.css('margin', '0 3px 8px 3px');
@@ -138,12 +148,12 @@ searchButton.on('click', function(event){
                                 futureTempEl.text  ("Temp: " + tempCardData + " C");
                                 
                                 
-                                //setting next day date
-                                const tomorrow = new Date(timeNow)
-                                tomorrow.setDate(tomorrow.getDate() + i)
-                                let formatedTom = `${tomorrow.getDate()+1}/${tomorrow.getMonth()}/${tomorrow.getFullYear()}`
-                                console.log(formatedTom)
-                                futureDateEl.text (formatedTom)
+                                // //setting next day date
+                                // const tomorrow = new Date(timeNow)
+                                // tomorrow.setDate(tomorrow.getDate() + i)
+                                // let formatedTom = `${tomorrow.getDate()+1}/${tomorrow.getMonth()}/${tomorrow.getFullYear()}`
+                                // console.log(formatedTom)
+                                futureDateEl.text (testDate)
 
                                 // //weather icon
                                 let iconURL = "http://openweathermap.org/img/wn/"+iconCardData +"@2x.png";
@@ -152,7 +162,11 @@ searchButton.on('click', function(event){
                                     method:"GET"
                                 }).then (function(response){
                                     futureIcon.attr ( 'src',iconURL);
-                                })
+                                });
+
+                            } else{
+                                console.log("PROBLEM")
+                            }   
                         }
                        
                      });
