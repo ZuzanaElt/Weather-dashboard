@@ -37,7 +37,7 @@ function currentDate() {
         todayIcon.css('width','100px');
         
         // //weather icon for today section
-        let iconTodayURL = "http://openweathermap.org/img/wn/"+iconCodeToday +"@2x.png";
+        let iconTodayURL = "https://openweathermap.org/img/wn/"+iconCodeToday +"@2x.png";
         $.ajax({
                 url: iconTodayURL,
                 method:"GET"
@@ -88,7 +88,7 @@ searchButton.on('click', function(event){
         historyButtonRemove();
         
         //when pressed-button our choice gets inputted into the API call for geo location
-        let urlChoiceGeocode =  "http://api.openweathermap.org/geo/1.0/direct?q=" +userChoice+ "&limit=5&units=metric&appid=556e5cd8ffff392ae1955c107d35e1a2";
+        let urlChoiceGeocode =  "https://api.openweathermap.org/geo/1.0/direct?q=" +userChoice+ "&limit=5&units=metric&appid=556e5cd8ffff392ae1955c107d35e1a2";
 
         //getting response from APi
         $.ajax({
@@ -185,7 +185,7 @@ function forecastSectionPopulating(){
                                 futureDateEl.text (twistedDate);
 
                                 // //weather icon
-                                let iconURL = "http://openweathermap.org/img/wn/"+iconCardData +"@2x.png";
+                                let iconURL = "https://openweathermap.org/img/wn/"+iconCardData +"@2x.png";
                                 $.ajax({
                                     url: iconURL,
                                     method:"GET"
@@ -208,7 +208,7 @@ function historyButtonRemove() {
                 
                 clearSections()
                 //when pressed-button our choice gets inputted into the API call for geo location
-                let urlChoiceGeocode =  "http://api.openweathermap.org/geo/1.0/direct?q=" +userChoice+ "&limit=5&units=metric&appid=556e5cd8ffff392ae1955c107d35e1a2";
+                let urlChoiceGeocode =  "https://api.openweathermap.org/geo/1.0/direct?q=" +userChoice+ "&limit=5&units=metric&appid=556e5cd8ffff392ae1955c107d35e1a2";
 
                 //getting response from APi call
                 $.ajax({
