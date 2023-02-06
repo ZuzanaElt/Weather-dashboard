@@ -159,6 +159,7 @@ function forecastSectionPopulating(){
                                 cardEl.css('color', 'white');
                                 cardEl.css('margin', '0 3px 8px 3px');
                                 cardEl.css('padding', '10px');
+                                cardEl.css('borderRadius', '5px');
                                 cardEl.text('');
                                 //attach cards to section
                                 forecastEl.append (cardEl);
@@ -222,7 +223,7 @@ function historyButtonRemove() {
                         localStorage.setItem('latit', latitude);
                         localStorage.setItem('long', longitude);
                         //getting information - temperature, wind and humidity from Api
-                        let =  urlWeather = "https://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+ longitude+"&units=metric&appid=556e5cd8ffff392ae1955c107d35e1a2"
+                        let urlWeather = "https://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+ longitude+"&units=metric&appid=556e5cd8ffff392ae1955c107d35e1a2"
                         $.ajax({
                         url: urlWeather,
                         method:"GET"
