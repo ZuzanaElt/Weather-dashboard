@@ -125,12 +125,13 @@ searchButton.on('click', function(event){
                 
                 forecastSectionPopulating();
         }); 
-             
+           
 });
 
 function clearSections() {
     forecastEl.empty();
     todaySection.empty();
+    
  }
 
 
