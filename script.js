@@ -97,7 +97,6 @@ searchButton.on('click', function(event){
         }).then (function(response){
                 latitude = (response[0].lat);
                 longitude = (response[0].lon);
-                console.log(response)
                 
                 //setting local storage to store latitude and longitude for out of function
                 localStorage.setItem('latit', latitude);
