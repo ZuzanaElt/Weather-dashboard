@@ -1,35 +1,47 @@
 
+body{padding:0 3% 0 3% ;}
 .container-fluid{
+    margin-top: 10px;
+    background: linear-gradient(279deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 57%, rgb(82, 128, 203) 100%);
+   
+}
+.container-main{
     margin-bottom:20px;
+    min-height: 250px;
     background: linear-gradient(279deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 57%, rgb(82, 128, 203) 100%);
 }
 aside{
+    color:white;
     float:left;
-    margin: 0 1.5%;
+    margin: 1% 1.5%;
     width: 100%;
-}
+    background: linear-gradient(279deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 57%, rgb(82, 128, 203) 100%);
+} 
 
 section {
-    float:left;
-    padding:5px;
-    display:flex;
-    margin: 5px;
-}
-#today{
-    background-color: rgb(170, 156, 156);
-    height: 150px;
-    float: left;
-    margin: 0;
-    width:60%;
+    padding:5px 10px 5px 10px;
+    display:inline-block;
+    margin: 20px;
+} 
+ #today{
+    background-color:inherit;
+    height:fit-content;
+    width:70%;
+    color:white;
+    margin: 0 0 0 10pt;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #forecast{
-    
-    margin:0;
-    width:60%;
+    margin: 0 0 0 10pt;
+    width:70%;
     justify-content:space-evenly;
     
-}
+    margin-left: auto;
+    margin-right: auto;
+    
+}  
 
 
 .cityBtn {
@@ -49,18 +61,13 @@ section {
     width:100%;
 }
 #search-input{
-    width:100%;
+    width:10rem;
+    margin-bottom:2px;
+    margin-left: 5px;
 }
-
-.list-group{
-    padding-right: 10px;
-    width: 100%;
-}
-
 .hr{
-    border: solid black;
+    border: solid white;
 }
-
 
 p{
     font-size: 14px;

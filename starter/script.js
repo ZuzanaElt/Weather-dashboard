@@ -16,8 +16,9 @@ let historyEl = $('#history');
 userChoice="";
 
 
-//function to get today's date
+
 function currentDate() {
+        //function to get today's date
         const timeNow = new Date();
         const date = ('0' + timeNow.getDate()).slice(-2);
         const month = ('0' + (timeNow.getMonth() + 1)).slice(-2);
@@ -29,6 +30,20 @@ function currentDate() {
  function todayWeather(){
       
         todaySection = $('#today');
+
+        let todayIcon =$('<img>');
+        todaySection.append(todayIcon);
+        todayIcon.css('height','100px');
+        todayIcon.css('width','100px');
+        
+        // //weather icon for today section
+        let iconTodayURL = "http://openweathermap.org/img/wn/"+iconCodeToday +"@2x.png";
+        $.ajax({
+                url: iconTodayURL,
+                method:"GET"
+        }).then (function(response){
+                todayIcon.attr ( 'src',iconTodayURL);
+        });        
 
         let cityName = $('<h2>');
         cityName.text(localStorage.getItem('city') + " " + todayDate);
@@ -45,17 +60,8 @@ function currentDate() {
         let windndEl = $('<p>');
         windndEl.text("Wind: " + localStorage.getItem('wind') + " KPH");
         cityName.append(windndEl);
-        let todayIcon =$('<img>');
-        todaySection.append(todayIcon);
+
         
-        // //weather icon for today section
-        let iconTodayURL = "http://openweathermap.org/img/wn/"+iconCodeToday +"@2x.png";
-        $.ajax({
-                url: iconTodayURL,
-                method:"GET"
-        }).then (function(response){
-                todayIcon.attr ( 'src',iconTodayURL);
-        });
 }
 
 function historyButtonsMake(){

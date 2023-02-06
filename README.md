@@ -14,3 +14,9 @@ positiinoing of elements https://learn.shayhowe.com/html-css/positioning-content
 reversing order of string:
 Fullstack Guy
 https://stackoverflow.com/questions/54722767/changing-order-of-characters-in-a-string-using-javascript
+
+## screenshot
+![screenshot of the page](Screenshot%20(41).png)
+
+
+
