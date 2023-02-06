@@ -46,6 +46,9 @@ https://stackoverflow.com/questions/54722767/changing-order-of-characters-in-a-s
 ## Mock-up
 ![screenshot of the page](Screenshot%20(41).png)
 
-###
+### Used
 Open Weather Api
+Bootstrap
+Jquerry
+FontAwesome
 
