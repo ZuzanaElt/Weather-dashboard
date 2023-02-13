@@ -203,7 +203,7 @@ function historyButtonRemove() {
         historyCityBtn.on('click', function(event){
                 event.preventDefault();
                 localStorage.setItem('city', this.innerHTML);
-                historyCityBtn.remove();
+                //historyCityBtn.remove();
                 userChoice=this.innerHTML;
                 
                 clearSections()
