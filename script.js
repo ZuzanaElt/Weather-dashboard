@@ -65,11 +65,11 @@ function currentDate() {
 }
 
 function historyButtonsMake(){
-        //creating history buttons and making them disappear when clicked
+        //creating history buttons 
         let historyCity = $('<button>');
         historyEl.prepend(historyCity);
-        historyCity.text(localStorage.getItem('city'))
-        historyCity.css({'backgroundColor': 'orange', 'color':' white', 'padding':'7x', 'margin':'3px'})
+        historyCity.text(`${localStorage.getItem('city')} - display again and remove from list`)
+        historyCity.css({'backgroundColor': 'orange', 'color':' white', 'padding':'7x', 'margin':'3px', 'fontSize':'smaller'})
         historyCity.attr('class','button btn')
         historyCity.attr('id','historyCity')
         
@@ -203,7 +203,8 @@ function historyButtonRemove() {
         historyCityBtn.on('click', function(event){
                 event.preventDefault();
                 localStorage.setItem('city', this.innerHTML);
-                //historyCityBtn.remove();
+                //to remove called city from a list of displayed cities:
+                historyCityBtn.remove();
                 userChoice=this.innerHTML;
                 
                 clearSections()
