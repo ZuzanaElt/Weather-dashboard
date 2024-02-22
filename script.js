@@ -68,7 +68,7 @@ function historyButtonsMake(){
         //creating history buttons 
         let historyCity = $('<button>');
         historyEl.prepend(historyCity);
-        historyCity.text(`${localStorage.getItem('city')} - display again and remove from list`)
+        historyCity.text(`${localStorage.getItem('city')} - remove from list`)
         historyCity.css({'backgroundColor': 'orange', 'color':' white', 'padding':'7x', 'margin':'3px', 'fontSize':'smaller'})
         historyCity.attr('class','button btn')
         historyCity.attr('id','historyCity')
